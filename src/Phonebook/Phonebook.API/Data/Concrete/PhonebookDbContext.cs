@@ -16,6 +16,9 @@ namespace Phonebook.API.Data.Concrete
             var client = new MongoClient(phonebookDatabaseSettings.ConnectionString);
             var database = client.GetDatabase(phonebookDatabaseSettings.DatabaseName);
             Persons = database.GetCollection<Person>(phonebookDatabaseSettings.CollectionName);
+
+            //seed data
+            PhonebookDbSeedData.SeedData(Persons);
             
         }
         public IMongoCollection<Person> Persons { get; set; }
