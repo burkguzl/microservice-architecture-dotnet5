@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{36DADB39-F740-4685-96D4-FF8F69727D7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Phonebook", "Phonebook", "{C261C72F-6B98-4105-BA16-757D42D7F101}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook.API", "src\Phonebook\Phonebook.API\Phonebook.API.csproj", "{D799000A-DE5A-4B7B-BB26-B665EE984441}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D799000A-DE5A-4B7B-BB26-B665EE984441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D799000A-DE5A-4B7B-BB26-B665EE984441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D799000A-DE5A-4B7B-BB26-B665EE984441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D799000A-DE5A-4B7B-BB26-B665EE984441}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C261C72F-6B98-4105-BA16-757D42D7F101} = {36DADB39-F740-4685-96D4-FF8F69727D7E}
+		{D799000A-DE5A-4B7B-BB26-B665EE984441} = {C261C72F-6B98-4105-BA16-757D42D7F101}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D7F9659-645F-45AE-82E4-B5F29D63D636}
+	EndGlobalSection
+EndGlobal
