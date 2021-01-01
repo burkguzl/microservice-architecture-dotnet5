@@ -5,6 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Phonebook.API.Settings.Abstract;
+using Phonebook.API.Settings.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +29,13 @@ namespace Phonebook.API
         {
 
             services.AddControllers();
+
+            services.Configure<PhonebookDatabaseSettings>(Configuration.GetSection("PhonebookDatabaseSettings"));
+
+
+            //set into the values of the person database settings inside to the person database settings class
+            services.AddSingleton<IPhonebookDatabaseSettings>(sp => sp.GetRequiredService<IOptions<PhonebookDatabaseSettings>>().Value);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

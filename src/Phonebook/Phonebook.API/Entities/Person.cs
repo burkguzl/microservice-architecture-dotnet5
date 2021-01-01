@@ -14,7 +14,7 @@ namespace Phonebook.API.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Company { get; set; }
-        public List<Address> Addresses { get; set; }
+        public ICollection<Address> Addresses { get; set; }
     }
 
 }
