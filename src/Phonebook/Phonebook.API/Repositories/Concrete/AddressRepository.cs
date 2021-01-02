@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using Phonebook.API.Data.Abstract;
 using Phonebook.API.Entities;
 using Phonebook.API.Repositories.Abstract;
@@ -19,30 +20,24 @@ namespace Phonebook.API.Repositories.Concrete
         }
         public async Task CreateAsync(string personId, Address address)
         {
-            FilterDefinition<Person> filter = Builders<Person>.Filter.ElemMatch(i => i.Id, personId);
 
-            var person = await _context.Persons.FindAsync(filter).Result.FirstOrDefaultAsync();
+            var person = await _context.Persons.Find(i => i.Id == personId).FirstOrDefaultAsync();
 
             person.Addresses.Add(address);
 
-            UpdateDefinition<Person> update = Builders<Person>.Update.Set(i => i.Addresses, person.Addresses);
+            await _context.Persons.FindOneAndUpdateAsync(i=> i.Id == personId, Builders<Person>.Update.Set(i=> i.Addresses, person.Addresses));
 
-            await _context.Persons.FindOneAndUpdateAsync(filter, update);
         }
 
         public async Task DeleteAsync(string personId, string addressId)
         {
-            FilterDefinition<Person> filter = Builders<Person>.Filter.ElemMatch(i => i.Id, personId);
+            var person = await _context.Persons.Find(i => i.Id == personId).FirstOrDefaultAsync();
 
-            var person = await _context.Persons.FindAsync(filter).Result.FirstOrDefaultAsync();
+            var deleteAddress = person.Addresses.FirstOrDefault(i => i.Id == addressId);
 
-            var address = person.Addresses.FirstOrDefault(i => i.Id == addressId);
+            person.Addresses.Remove(deleteAddress);
 
-            person.Addresses.Remove(address);
-
-            UpdateDefinition<Person> update = Builders<Person>.Update.Set(i => i.Addresses, person.Addresses);
-
-            await _context.Persons.FindOneAndUpdateAsync(filter, update);
+            await _context.Persons.FindOneAndUpdateAsync(i => i.Id == personId, Builders<Person>.Update.Set(i=> i.Addresses , person.Addresses));
         }
     }
 }

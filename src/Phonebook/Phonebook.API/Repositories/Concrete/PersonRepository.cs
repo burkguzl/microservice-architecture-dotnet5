@@ -26,7 +26,7 @@ namespace Phonebook.API.Repositories.Concrete
 
         public async Task DeleteAsync(string id)
         {
-            await _context.Persons.DeleteOneAsync(Builders<Person>.Filter.ElemMatch(i => i.Id, id));
+            await _context.Persons.DeleteOneAsync(Builders<Person>.Filter.Eq(i => i.Id, id));
         }
 
         public async Task<IEnumerable<Person>> GetAllAsync()
@@ -38,7 +38,7 @@ namespace Phonebook.API.Repositories.Concrete
 
         public async Task<Person> GetAsync(string id)
         {
-            return await _context.Persons.Find(Builders<Person>.Filter.ElemMatch(i=> i.Id, id)).FirstOrDefaultAsync();
+            return await _context.Persons.Find(Builders<Person>.Filter.Eq(i=> i.Id, id)).FirstOrDefaultAsync();
         }
 
        

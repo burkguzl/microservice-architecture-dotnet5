@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Phonebook.API.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Company { get; set; }
+        [BsonElementAttribute("AddressGroup")]
         public ICollection<Address> Addresses { get; set; }
     }
 
