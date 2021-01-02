@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Phonebook.API.Data.Abstract;
+using Phonebook.API.Data.Concrete;
+using Phonebook.API.Repositories.Abstract;
 using Phonebook.API.Settings.Abstract;
 using Phonebook.API.Settings.Concrete;
 using System;
@@ -35,6 +38,8 @@ namespace Phonebook.API
 
             //set into the values of the person database settings inside to the person database settings class
             services.AddSingleton<IPhonebookDatabaseSettings>(sp => sp.GetRequiredService<IOptions<PhonebookDatabaseSettings>>().Value);
+
+            services.AddTransient<IPhonebookDbContext, PhonebookDbContext>();
 
         }
 
