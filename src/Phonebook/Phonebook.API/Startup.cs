@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Phonebook.API.Data.Abstract;
 using Phonebook.API.Data.Concrete;
 using Phonebook.API.Repositories.Abstract;
+using Phonebook.API.Repositories.Concrete;
 using Phonebook.API.Settings.Abstract;
 using Phonebook.API.Settings.Concrete;
 using System;
@@ -40,6 +41,10 @@ namespace Phonebook.API
             services.AddSingleton<IPhonebookDatabaseSettings>(sp => sp.GetRequiredService<IOptions<PhonebookDatabaseSettings>>().Value);
 
             services.AddTransient<IPhonebookDbContext, PhonebookDbContext>();
+
+            services.AddTransient<IPersonRepository, PersonRepository>();
+
+            services.AddTransient<IAddressRepository, AddressRepository>();
 
         }
 

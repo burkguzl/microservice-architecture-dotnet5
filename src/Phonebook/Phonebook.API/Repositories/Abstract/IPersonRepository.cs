@@ -11,8 +11,6 @@ namespace Phonebook.API.Repositories.Abstract
     {
         Task CreateAsync(Person person);
         Task DeleteAsync(string id);
-        Task AddAddressAsync(string personId, Address address);
-        Task RemoveAddressAsync(string personId, string addressId);
         Task<IEnumerable<Person>> GetAllAsync();
         Task<Person> GetAsync(string id);
     }
