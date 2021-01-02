@@ -55,7 +55,7 @@ namespace Phonebook.API
                     Version = "v1",
                     Contact = new OpenApiContact
                     {
-                        Name = "Burak Güzel",
+                        Name = "Burak Guzel",
                         Email = "burakguzel@outlook.com",
                     }
                 });
