@@ -1,8 +1,11 @@
 version: '3.4'
 
 services:
-  phonebook.api:
-    image: ${DOCKER_REGISTRY-}phonebookapi
-    build:
-      context: .
-      dockerfile: src/Phonebook/Phonebook.API/Dockerfile
+    phonebookdb:
+        image: mongo
+
+    phonebook.api:
+        image: ${DOCKER_REGISTRY-}phonebookapi
+        build:
+            context: .
+            dockerfile: src/Phonebook/Phonebook.API/Dockerfile

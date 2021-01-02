@@ -1,8 +1,22 @@
 version: '3.4'
 
 services:
-  phonebook.api:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "80"
+    phonebookdb: 
+        container_name: phonebookdb
+        restart: always
+        volumes:
+            - /{WEBAPP_STORAGE_HOME}/site:/data/db
+        ports:
+            - "27017:27017"
+
+    phonebook.api:
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - "PhonebookDatabaseSettings:ConnectionString=mongodb://phonebookdb:27017"
+        depends_on:
+            - phonebookdb
+        volumes:
+            - ${HOME}/.microsoft:/usersecrets/:/root/.microsoft/usersecrets
+            - ${HOME}/.aspnet/https:/root/.aspnet/https/
+        ports:
+            - "8000:80"
