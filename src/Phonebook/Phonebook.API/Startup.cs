@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Phonebook.API.Data.Abstract;
 using Phonebook.API.Data.Concrete;
 using Phonebook.API.Repositories.Abstract;
@@ -46,6 +47,21 @@ namespace Phonebook.API
 
             services.AddTransient<IAddressRepository, AddressRepository>();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Phonebook API",
+                    Version = "v1",
+                    Description = "Phonebook API",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Burak Güzel",
+                        Email = "burakguzel@outlook.com",
+                    }
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +71,13 @@ namespace Phonebook.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Phonebook API V1");
+
+            });
 
             app.UseRouting();
 
