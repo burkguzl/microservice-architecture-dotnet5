@@ -53,7 +53,6 @@ namespace Phonebook.API
                 {
                     Title = "Phonebook API",
                     Version = "v1",
-                    Description = "Phonebook API",
                     Contact = new OpenApiContact
                     {
                         Name = "Burak Güzel",
