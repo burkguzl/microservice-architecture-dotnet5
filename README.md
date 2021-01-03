@@ -41,4 +41,4 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
   - Event-Driven Architecture (RabbitMQ)
   - CQRS Design Pattern
   - Mediator Desing Pattern
-  - SOLID Architectureongo.
+  - SOLID Architecture
