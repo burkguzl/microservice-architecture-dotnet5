@@ -38,7 +38,16 @@ namespace Report.API
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Report.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Report API",
+                    Version = "v1",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Burak Guzel",
+                        Email = "burakguzel@outlook.com",
+                    }
+                });
             });
 
             services.Configure<PhonebookDatabaseSettings>(Configuration.GetSection("PhonebookDatabaseSettings"));
@@ -76,7 +85,7 @@ namespace Report.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Report.API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Report API v1"));
             }
 
             app.UseRabbitListener();
