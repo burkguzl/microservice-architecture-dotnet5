@@ -16,6 +16,9 @@ services:
 
     phonebook.api:
         container_name: phonebookapi
+        depends_on:
+            - phonebookdb
+            - rabbitmq
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
             - "PhonebookDatabaseSettings:ConnectionString=mongodb://phonebookdb:27017"
@@ -26,6 +29,9 @@ services:
     report.api:
         container_name: reportapi
         restart: "on-failure"
+        depends_on:
+            - phonebookdb
+            - rabbitmq
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
             - "PhonebookDatabaseSettings:ConnectionString=mongodb://phonebookdb:27017"
