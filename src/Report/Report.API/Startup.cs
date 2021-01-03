@@ -1,3 +1,6 @@
+using EventBusRabbitMQ.Abstract;
+using EventBusRabbitMQ.Concrete;
+using EventBusRabbitMQ.Producer;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
 using Report.Application.Commands;
 using Report.Core.Data;
 using Report.Core.Repositories;
@@ -53,6 +57,20 @@ namespace Report.API
             services.AddTransient<IReportRepository, ReportRepository>();
 
             services.AddMediatR(typeof(PrepareReportCommand).GetTypeInfo().Assembly);
+
+            services.AddSingleton<IRabbitMQConnection>(sp =>
+            {
+                var connectionFactory = new ConnectionFactory()
+                {
+                    HostName = Configuration["EventBus:HostName"],
+                    UserName = Configuration["EventBus:UserName"],
+                    Password = Configuration["EventBus:Password"],
+                };
+
+                return new RabbitMQConnection(connectionFactory);
+            });
+
+            services.AddSingleton<EventBusRabbitMQProducer>();
 
         }
 

@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\EventBusRabbitMQ\EventBusRabbitMQ.csproj" />
     <ProjectReference Include="..\Report.Application\Report.Application.csproj" />
     <ProjectReference Include="..\Report.Core\Report.Core.csproj" />
     <ProjectReference Include="..\Report.Infrastructure\Report.Infrastructure.csproj" />
