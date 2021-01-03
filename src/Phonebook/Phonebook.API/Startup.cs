@@ -1,3 +1,5 @@
+using EventBusRabbitMQ.Abstract;
+using EventBusRabbitMQ.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +15,7 @@ using Phonebook.API.Repositories.Abstract;
 using Phonebook.API.Repositories.Concrete;
 using Phonebook.API.Settings.Abstract;
 using Phonebook.API.Settings.Concrete;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +62,18 @@ namespace Phonebook.API
                         Email = "burakguzel@outlook.com",
                     }
                 });
+            });
+
+            services.AddSingleton<IRabbitMQConnection>(sp =>
+            {
+                var connectionFactory = new ConnectionFactory()
+                {
+                    HostName = Configuration["EventBus:HostName"],
+                    UserName = Configuration["EventBus:UserName"],
+                    Password = Configuration["EventBus:Password"],
+                };
+
+                return new RabbitMQConnection(connectionFactory);
             });
 
         }
