@@ -60,30 +60,7 @@ namespace Report.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<ReportResponse>> PrepareReport(PrepareReportCommand command)
         {
-            var createReportCommand = new CreateReportCommand();
-
-            var createReportResponse = await _mediator.Send(createReportCommand);
-
-            if (createReportResponse == null)
-            {
-                return BadRequest();
-            }
-
-            var prepareReportCommand = new PrepareReportCommand
-            {
-                Location = command.Location,
-                Persons = command.Persons,
-                ReportId = createReportResponse.Id
-            };
-
-            var prepareReportResponse = await _mediator.Send(prepareReportCommand);
-
-            if (prepareReportResponse == null)
-            {
-                return BadRequest();
-            }
-
-            return Ok(prepareReportResponse);
+            
 
         }
 

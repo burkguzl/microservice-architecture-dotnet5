@@ -70,7 +70,7 @@ namespace Report.API
                 return new RabbitMQConnection(connectionFactory);
             });
 
-            services.AddSingleton<EventBusRabbitMQProducer>();
+            services.AddSingleton<EventBusRabbitMQConsumer>();
 
         }
 
