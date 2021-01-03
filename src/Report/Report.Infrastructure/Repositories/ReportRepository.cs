@@ -18,6 +18,11 @@ namespace Report.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task CreateAsync(ReportEntity report)
+        {
+            await _context.Reports.InsertOneAsync(report);
+        }
+
         public async Task<ReportEntity> GetAsync(string id)
         {
             return await _context.Reports.Find(Builders<ReportEntity>.Filter.Eq(i => i.Id, id)).FirstOrDefaultAsync();

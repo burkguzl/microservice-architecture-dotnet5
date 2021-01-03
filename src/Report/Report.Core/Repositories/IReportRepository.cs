@@ -8,6 +8,7 @@ namespace Report.Core.Repositories
 {
     public interface IReportRepository
     {
+        Task CreateAsync(ReportEntity report);
         Task<List<ReportEntity>> GetAllAsync();
         Task<ReportEntity> GetAsync(string id);
     }
