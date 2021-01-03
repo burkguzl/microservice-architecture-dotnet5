@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using Report.Application.Commands;
 using Report.Application.Responses;
 using Report.Core.Entities;
+using Report.Core.Enums;
 using Report.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -27,8 +28,8 @@ namespace Report.Application.Handlers
             var reportEntity = new ReportEntity
             {
                 Id = ObjectId.GenerateNewId().ToString(),
-                Date = request.Date,
-                Status = request.Status
+                Date = DateTime.Now,
+                Status = ReportStatusEnum.Preparing.ToString()
             };
 
             await _reportRepository.CreateAsync(reportEntity);

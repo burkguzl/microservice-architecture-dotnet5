@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Report.Application.Commands;
 using Report.Core.Data;
 using Report.Core.Repositories;
 using Report.Core.Settings.Abstract;
@@ -16,6 +18,7 @@ using Report.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Report.API
@@ -48,6 +51,9 @@ namespace Report.API
             services.AddTransient<IPhonebookDbContext, PhonebookDbContext>();
 
             services.AddTransient<IReportRepository, ReportRepository>();
+
+            services.AddMediatR(typeof(PrepareReportCommand).GetTypeInfo().Assembly);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
