@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phonebook.API", "src\Phoneb
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A973DA85-6EC5-4A20-B89E-FCC118FB42E1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C23BA738-56AB-4FFF-8A50-88BCF080A1DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBusRabbitMQ", "src\Common\EventBusRabbitMQ\EventBusRabbitMQ.csproj", "{B9D59C04-4ADE-4DC9-AC13-3E168471DCA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{A973DA85-6EC5-4A20-B89E-FCC118FB42E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A973DA85-6EC5-4A20-B89E-FCC118FB42E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A973DA85-6EC5-4A20-B89E-FCC118FB42E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9D59C04-4ADE-4DC9-AC13-3E168471DCA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9D59C04-4ADE-4DC9-AC13-3E168471DCA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9D59C04-4ADE-4DC9-AC13-3E168471DCA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9D59C04-4ADE-4DC9-AC13-3E168471DCA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C261C72F-6B98-4105-BA16-757D42D7F101} = {36DADB39-F740-4685-96D4-FF8F69727D7E}
 		{D799000A-DE5A-4B7B-BB26-B665EE984441} = {C261C72F-6B98-4105-BA16-757D42D7F101}
+		{C23BA738-56AB-4FFF-8A50-88BCF080A1DD} = {36DADB39-F740-4685-96D4-FF8F69727D7E}
+		{B9D59C04-4ADE-4DC9-AC13-3E168471DCA7} = {C23BA738-56AB-4FFF-8A50-88BCF080A1DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D7F9659-645F-45AE-82E4-B5F29D63D636}
