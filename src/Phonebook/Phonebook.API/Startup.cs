@@ -1,5 +1,6 @@
 using EventBusRabbitMQ.Abstract;
 using EventBusRabbitMQ.Concrete;
+using EventBusRabbitMQ.Producer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -75,6 +76,8 @@ namespace Phonebook.API
 
                 return new RabbitMQConnection(connectionFactory);
             });
+
+            services.AddSingleton<EventBusRabbitMQProducer>();
 
         }
 
