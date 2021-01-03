@@ -1,31 +1,24 @@
 using EventBusRabbitMQ.Abstract;
 using EventBusRabbitMQ.Concrete;
-using EventBusRabbitMQ.Producer;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using RabbitMQ.Client;
 using Report.API.Extensions;
 using Report.API.RabbitMQ;
-using Report.Application.Commands;
+using Report.Application.Queries;
 using Report.Core.Data;
 using Report.Core.Repositories;
 using Report.Core.Settings.Abstract;
 using Report.Core.Settings.Concrete;
 using Report.Infrastructure.Data;
 using Report.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Report.API
 {
@@ -58,7 +51,7 @@ namespace Report.API
 
             services.AddTransient<IReportRepository, ReportRepository>();
 
-            services.AddMediatR(typeof(PrepareReportCommand).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(GetReportByIdQuery).GetTypeInfo().Assembly);
 
             services.AddSingleton<IRabbitMQConnection>(sp =>
             {

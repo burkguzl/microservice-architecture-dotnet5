@@ -11,3 +11,10 @@ services:
         build:
             context: .
             dockerfile: src/Phonebook/Phonebook.API/Dockerfile
+
+    report.api:
+        image: ${DOCKER_REGISTRY-}reportapi
+        build:
+            context: .
+            dockerfile: src/Report/Report.API/Dockerfile
+

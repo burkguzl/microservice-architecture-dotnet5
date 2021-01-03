@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using Report.Application.Commands;
 using Report.Application.Queries;
 using Report.Application.Responses;
 using Report.Core.Entities;
@@ -54,15 +53,5 @@ namespace Report.API.Controllers
             return Ok(response);
 
         }
-
-        [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ReportResponse), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<ReportResponse>> PrepareReport(PrepareReportCommand command)
-        {
-            
-
-        }
-
     }
 }
