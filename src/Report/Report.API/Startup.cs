@@ -36,6 +36,17 @@ namespace Report.API
         {
 
             services.AddControllers();
+            
+            services.Configure<PhonebookDatabaseSettings>(Configuration.GetSection("PhonebookDatabaseSettings"));
+
+
+            //set into the values of the person database settings inside to the person database settings class
+            services.AddSingleton<IPhonebookDatabaseSettings>(sp => sp.GetRequiredService<IOptions<PhonebookDatabaseSettings>>().Value);
+
+            services.AddTransient<IPhonebookDbContext, PhonebookDbContext>();
+
+            services.AddTransient<IReportRepository, ReportRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -50,15 +61,6 @@ namespace Report.API
                 });
             });
 
-            services.Configure<PhonebookDatabaseSettings>(Configuration.GetSection("PhonebookDatabaseSettings"));
-
-
-            //set into the values of the person database settings inside to the person database settings class
-            services.AddSingleton<IPhonebookDatabaseSettings>(sp => sp.GetRequiredService<IOptions<PhonebookDatabaseSettings>>().Value);
-
-            services.AddTransient<IPhonebookDbContext, PhonebookDbContext>();
-
-            services.AddTransient<IReportRepository, ReportRepository>();
 
             services.AddMediatR(typeof(GetReportByIdQuery).GetTypeInfo().Assembly);
 
