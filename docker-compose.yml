@@ -4,7 +4,7 @@ services:
     phonebookdb:
         image: mongo
     rabbitmq:
-        image: rabbitmq:3-management-alphine
+        image: rabbitmq:3-management
 
     phonebook.api:
         image: ${DOCKER_REGISTRY-}phonebookapi
