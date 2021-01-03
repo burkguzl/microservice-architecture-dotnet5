@@ -3,6 +3,8 @@ version: '3.4'
 services:
     phonebookdb:
         image: mongo
+    rabbitmq:
+        image: rabbitmq:3-management-alphine
 
     phonebook.api:
         image: ${DOCKER_REGISTRY-}phonebookapi

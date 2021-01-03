@@ -7,11 +7,19 @@ services:
         ports:
             - "27017:27017"
 
+    rabbitmq: 
+        container_name: rabbitmq
+        restart: always
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+
     phonebook.api:
         container_name: phonebookapi
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
             - "PhonebookDatabaseSettings:ConnectionString=mongodb://phonebookdb:27017"
+            - "EventBus:HostName=rabbitmq"
         depends_on:
             - phonebookdb
         ports:
