@@ -1,11 +1,13 @@
 ﻿using EventBusRabbitMQ.Abstract;
 using EventBusRabbitMQ.Constants;
 using EventBusRabbitMQ.Events;
+using EventBusRabbitMQ.Events.Models;
 using MediatR;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Report.Application.Commands;
 using Report.Application.Responses;
 using Report.Core.Entities;
 using Report.Core.Enums;
@@ -40,7 +42,7 @@ namespace Report.API.RabbitMQ
 
             consumer.Received += ReceivedEvent;
 
-            channel.BasicConsume(queue: EventBusConstants.PrepareReportQueue, autoAck: true, consumer: consumer, noLocal:false);
+            channel.BasicConsume(queue: EventBusConstants.PrepareReportQueue, autoAck: true, consumer: consumer, noLocal: false);
 
         }
 
@@ -52,41 +54,37 @@ namespace Report.API.RabbitMQ
                 var prepareReportEvent = JsonConvert.DeserializeObject<PrepareReportEvent>(message);
 
                 //create a new report
-                var reportEntity = new ReportEntity
+                var createCommand = new CreateReportCommand
                 {
-                    Id = ObjectId.GenerateNewId().ToString(),
-                    Date = DateTime.Now,
-                    Status = ReportStatusEnum.Preparing.ToString()
+                    Location = prepareReportEvent.Location
                 };
 
-                await _reportRepository.CreateAsync(reportEntity);
+                var createCommandResponse = await _mediator.Send(createCommand);
 
                 //update the report
-                int totalPerson = 0;
-                int totalPhoneNumber = 0;
-                foreach (var person in prepareReportEvent.Persons)
+                var prepareReportCommand = new PrepareReportCommand
                 {
-                    if (person.Addresses.Where(i => i.Location == prepareReportEvent.Location).Any())
+                    Location = prepareReportEvent.Location,
+                    Persons = prepareReportEvent.Persons.Select(i => new Application.Models.PersonModel
                     {
-                        totalPerson++;
-
-                        foreach (var address in person.Addresses)
+                        Id = i.Id,
+                        Company = i.Company,
+                        FirstName = i.FirstName,
+                        LastName = i.LastName,
+                        Addresses = i.Addresses.Select(x => new Application.Models.AddressModel
                         {
-                            if (address.Location == prepareReportEvent.Location)
-                            {
-                                if (!string.IsNullOrWhiteSpace(address.Phone))
-                                {
-                                    totalPhoneNumber++;
-                                }
-                            }
+                            Id = x.Id,
+                            AddressType = x.AddressType,
+                            Email = x.Email,
+                            Location = x.Location,
+                            Phone = x.Phone
+                        }).ToList()
+                    }).ToList(),
+                    ReportId = createCommandResponse.Id,
+                    RequestId = prepareReportEvent.RequestId
+                };
 
-                        }
-                    }
-
-                }
-
-                await _reportRepository.UpdateAsync(reportEntity.Id, totalPerson, totalPhoneNumber);
-
+                await _mediator.Send(prepareReportCommand);
             }
         }
 

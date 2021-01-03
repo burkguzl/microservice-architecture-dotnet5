@@ -20,11 +20,8 @@ services:
             - ASPNETCORE_ENVIRONMENT=Development
             - "PhonebookDatabaseSettings:ConnectionString=mongodb://phonebookdb:27017"
             - "EventBus:HostName=rabbitmq"
-        depends_on:
-            - phonebookdb
-            - rabbitmq
         ports:
-            - "8000:80"
+            - "8001:80"
 
     report.api:
         container_name: reportapi
@@ -33,9 +30,6 @@ services:
             - ASPNETCORE_ENVIRONMENT=Development
             - "PhonebookDatabaseSettings:ConnectionString=mongodb://phonebookdb:27017"
             - "EventBus:HostName=rabbitmq"
-        depends_on:
-            - phonebookdb
-            - rabbitmq
         ports:
-           - "8001:80"
+           - "8002:80"
 
