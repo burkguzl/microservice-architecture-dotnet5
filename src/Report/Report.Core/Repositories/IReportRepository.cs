@@ -11,5 +11,6 @@ namespace Report.Core.Repositories
         Task CreateAsync(ReportEntity report);
         Task<List<ReportEntity>> GetAllAsync();
         Task<ReportEntity> GetAsync(string id);
+        Task UpdateAsync(string reportId, int totalPerson, int totalPhoneNumber);
     }
 }

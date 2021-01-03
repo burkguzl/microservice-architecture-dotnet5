@@ -13,6 +13,7 @@ namespace EventBusRabbitMQ.Events
         }
         public Guid RequestId { get; set; }
         public List<PersonModel> Persons { get; set; }
+        public string Location { get; set; }
     }
    
 }

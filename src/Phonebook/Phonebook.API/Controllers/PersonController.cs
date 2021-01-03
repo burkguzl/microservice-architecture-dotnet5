@@ -71,12 +71,20 @@ namespace Phonebook.API.Controllers
 
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{location}")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<List<Person>>> PrepareReport()
+        public async Task<ActionResult<List<Person>>> PrepareReport(string location)
         {
             var persons = await _personRepository.GetAllAsync();
+            if (!persons.Where(i=> i.Addresses.Where(x=> x.Location == location).Any()).Any())
+            {
+                return BadRequest();
+            }
+            if (persons == null)
+            {
+                return BadRequest();
+            }
             var publishModel = new PrepareReportEvent();
             for (int i = 0; i < persons.Count(); i++)
             {
@@ -98,6 +106,7 @@ namespace Phonebook.API.Controllers
             }
 
             publishModel.RequestId = Guid.NewGuid();
+            publishModel.Location = location;
 
             try
             {
