@@ -4,6 +4,7 @@ using EventBusRabbitMQ.Events;
 using MediatR;
 using MongoDB.Bson;
 using Newtonsoft.Json;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Report.Application.Responses;
 using Report.Core.Entities;
@@ -87,6 +88,11 @@ namespace Report.API.RabbitMQ
                 await _reportRepository.UpdateAsync(reportEntity.Id, totalPerson, totalPhoneNumber);
 
             }
+        }
+
+        public void Disconnect()
+        {
+            _connection.Dispose();
         }
     }
 }

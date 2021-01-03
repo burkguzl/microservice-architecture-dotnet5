@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using RabbitMQ.Client;
+using Report.API.Extensions;
+using Report.API.RabbitMQ;
 using Report.Application.Commands;
 using Report.Core.Data;
 using Report.Core.Repositories;
@@ -83,6 +85,8 @@ namespace Report.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Report.API v1"));
             }
+
+            app.UseRabbitListener();
 
             app.UseRouting();
 
