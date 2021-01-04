@@ -21,7 +21,7 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
   - GET - api/v1/Person/{id} : Get person by id 
   - POST - api/v1/Person : Add a new person
   - DELETE - api/v1/Person/{id} : Delete person
-  - GET - api/v1/Person/{location} : It sends a report creation request to the report microservice over the rabbitmq according to the location information entered.
+  - GET - api/v1/Person/PrepareReport/{location} : It sends a report creation request to the report microservice over the rabbitmq according to the location information entered.
   - POST - api/v1/Address/{personId} : Add address information to the person
   - DELETE - api/v1/Address/{personId}/{addressId} : Delete the address information of the person
 ### Report API
